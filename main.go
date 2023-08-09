@@ -4,12 +4,24 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"runtime/debug"
 	"text/template"
 
 	"github.com/spf13/pflag"
 )
 
 var Version string
+
+func getVersion() string {
+	if Version != "" {
+		return Version
+	}
+	i, ok := debug.ReadBuildInfo()
+	if !ok {
+		return "unknown"
+	}
+	return i.Main.Version
+}
 
 func mustEnv(env string) (string, error) {
 	res := os.Getenv(env)
@@ -26,7 +38,7 @@ func main() {
 	_ = optOutput
 
 	if *optVersion {
-		fmt.Fprintln(os.Stdout, Version)
+		fmt.Fprintln(os.Stdout, getVersion())
 		os.Exit(0)
 	}
 
