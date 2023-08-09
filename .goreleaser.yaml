@@ -4,6 +4,8 @@ builds:
     id: text-env
     binary: text-env
     env: [CGO_ENABLED=0]
+    ldflags:
+      - -X main.Version=v{{.Version}}
     goos:
       - linux
       - windows
