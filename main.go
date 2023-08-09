@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/pflag"
 )
 
-var Version string = "default version"
+var Version string
 
 func mustEnv(env string) (string, error) {
 	res := os.Getenv(env)
