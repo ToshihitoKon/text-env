@@ -1,0 +1,19 @@
+project_name: text-env
+builds:
+  - dir: .
+    id: text-env
+    binary: text-env
+    env: [CGO_ENABLED=0]
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - id: text-env
+    builds:
+      - text-env
+    name_template: "{{ .Binary }}_{{ .Os }}_{{ .Arch }}"
